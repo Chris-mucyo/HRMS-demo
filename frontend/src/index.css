@@ -1,0 +1,350 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens from the theme ───────────────────────────────────── */
+:root {
+  --background: oklch(0.8452 0 0);
+  --foreground: oklch(0.2393 0 0);
+  --card: oklch(0.7572 0 0);
+  --card-foreground: oklch(0.2393 0 0);
+  --primary: oklch(0.5016 0.1887 27.4816);      /* rust/orange */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.4955 0.0896 126.1858);   /* forest green */
+  --secondary-foreground: oklch(1 0 0);
+  --accent: oklch(0.588 0.0993 245.7394);        /* steel blue */
+  --accent-foreground: oklch(1 0 0);
+  --muted: oklch(0.7826 0 0);
+  --muted-foreground: oklch(0.4091 0 0);
+  --destructive: oklch(0.7076 0.1975 46.4558);
+  --destructive-foreground: oklch(0 0 0);
+  --border: oklch(0.4313 0 0);
+  --input: oklch(0.4313 0 0);
+  --ring: oklch(0.5016 0.1887 27.4816);
+  --sidebar: oklch(0.7572 0 0);
+  --sidebar-foreground: oklch(0.2393 0 0);
+  --sidebar-primary: oklch(0.5016 0.1887 27.4816);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.588 0.0993 245.7394);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.4313 0 0);
+  --font-sans: "Oxanium", sans-serif;
+  --font-mono: "Source Code Pro", monospace;
+  --radius: 0px;
+  --shadow: 0px 2px 4px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow-md: 0px 2px 4px 0px hsl(0 0% 0% / 0.40), 0px 2px 4px -1px hsl(0 0% 0% / 0.40);
+  --shadow-lg: 0px 2px 4px 0px hsl(0 0% 0% / 0.40), 0px 4px 6px -1px hsl(0 0% 0% / 0.40);
+}
+
+.dark {
+  --background: oklch(0.2178 0 0);
+  --foreground: oklch(0.9067 0 0);
+  --card: oklch(0.285 0 0);
+  --card-foreground: oklch(0.9067 0 0);
+  --primary: oklch(0.6083 0.209 27.0276);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.6423 0.1467 133.0145);
+  --secondary-foreground: oklch(0 0 0);
+  --accent: oklch(0.7482 0.1235 244.7492);
+  --accent-foreground: oklch(0 0 0);
+  --muted: oklch(0.2645 0 0);
+  --muted-foreground: oklch(0.7058 0 0);
+  --destructive: oklch(0.7839 0.1719 68.0943);
+  --destructive-foreground: oklch(0 0 0);
+  --border: oklch(0.4091 0 0);
+  --input: oklch(0.4091 0 0);
+  --ring: oklch(0.6083 0.209 27.0276);
+  --sidebar: oklch(0.1913 0 0);
+  --sidebar-foreground: oklch(0.9067 0 0);
+  --sidebar-primary: oklch(0.6083 0.209 27.0276);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.7482 0.1235 244.7492);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0.4091 0 0);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: oklch(var(--border, 0.4313 0 0));
+  }
+  body {
+    background-color: oklch(var(--background, 0.8452 0 0));
+    color: oklch(var(--foreground, 0.2393 0 0));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2
+    text-sm font-semibold uppercase tracking-widest
+    transition-all duration-150;
+    background-color: oklch(0.5016 0.1887 27.4816);
+    color: oklch(1 0 0);
+    border: 2px solid oklch(0.5016 0.1887 27.4816);
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 oklch(0.2393 0 0);
+  }
+  .btn-primary:hover {
+    background-color: oklch(0.4 0.17 27);
+    box-shadow: 1px 1px 0 oklch(0.2393 0 0);
+    transform: translate(2px, 2px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 3px 3px 0 oklch(0.2393 0 0);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2
+    text-sm font-semibold uppercase tracking-widest
+    transition-all duration-150;
+    background-color: transparent;
+    color: oklch(0.2393 0 0);
+    border: 2px solid oklch(0.4313 0 0);
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 oklch(0.4313 0 0);
+  }
+  .btn-secondary:hover {
+    background-color: oklch(0.7572 0 0);
+    box-shadow: 1px 1px 0 oklch(0.4313 0 0);
+    transform: translate(2px, 2px);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center px-4 py-2
+    text-sm font-semibold uppercase tracking-widest
+    transition-all duration-150;
+    background-color: oklch(0.7076 0.1975 46.4558);
+    color: oklch(0 0 0);
+    border: 2px solid oklch(0.5 0.18 46);
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 oklch(0.2393 0 0);
+  }
+  .btn-danger:hover {
+    background-color: oklch(0.6 0.18 46);
+    box-shadow: 1px 1px 0 oklch(0.2393 0 0);
+    transform: translate(2px, 2px);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-4 py-2
+    text-sm font-semibold uppercase tracking-widest
+    transition-all duration-150;
+    background-color: oklch(0.588 0.0993 245.7394);
+    color: oklch(1 0 0);
+    border: 2px solid oklch(0.45 0.09 245);
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 oklch(0.2393 0 0);
+  }
+  .btn-accent:hover {
+    background-color: oklch(0.48 0.09 245);
+    box-shadow: 1px 1px 0 oklch(0.2393 0 0);
+    transform: translate(2px, 2px);
+  }
+
+  /* ── Inputs ──────────────────────────────────────────────────────── */
+  .input-field {
+    @apply mt-1 block w-full py-2 px-3 text-sm
+    transition-all duration-150;
+    background-color: oklch(0.8452 0 0);
+    color: oklch(0.2393 0 0);
+    border: 2px solid oklch(0.4313 0 0);
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: oklch(0.5016 0.1887 27.4816);
+    box-shadow: 2px 2px 0 oklch(0.5016 0.1887 27.4816);
+  }
+  .input-field::placeholder {
+    color: oklch(0.55 0 0);
+  }
+
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background-color: oklch(0.7572 0 0);
+    border: 2px solid oklch(0.4313 0 0);
+    border-radius: var(--radius);
+    box-shadow: 4px 4px 0 oklch(0.4313 0 0);
+  }
+
+  /* ── Tables ──────────────────────────────────────────────────────── */
+  .table-wrapper {
+    border: 2px solid oklch(0.4313 0 0);
+    box-shadow: 4px 4px 0 oklch(0.4313 0 0);
+    overflow: hidden;
+  }
+  .table-header {
+    background-color: oklch(0.2393 0 0);
+    color: oklch(0.9067 0 0);
+  }
+  .table-header th {
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-widest;
+    font-family: var(--font-sans);
+  }
+  .table-row {
+    border-bottom: 1px solid oklch(0.6 0 0);
+    background-color: oklch(0.7572 0 0);
+    transition: background-color 0.1s;
+  }
+  .table-row:hover {
+    background-color: oklch(0.8452 0 0);
+  }
+  .table-row td {
+    @apply px-4 py-3 text-sm;
+  }
+
+  /* ── Badges / Status Pills ───────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-bold uppercase tracking-wider;
+    border: 1.5px solid currentColor;
+    border-radius: var(--radius);
+  }
+  .badge-green {
+    color: oklch(0.35 0.1 130);
+    background-color: oklch(0.88 0.07 130);
+    border-color: oklch(0.35 0.1 130);
+  }
+  .badge-yellow {
+    color: oklch(0.4 0.12 80);
+    background-color: oklch(0.92 0.07 80);
+    border-color: oklch(0.4 0.12 80);
+  }
+  .badge-red {
+    color: oklch(0.4 0.15 30);
+    background-color: oklch(0.9 0.07 30);
+    border-color: oklch(0.4 0.15 30);
+  }
+  .badge-blue {
+    color: oklch(0.35 0.1 245);
+    background-color: oklch(0.88 0.06 245);
+    border-color: oklch(0.35 0.1 245);
+  }
+  .badge-gray {
+    color: oklch(0.35 0 0);
+    background-color: oklch(0.82 0 0);
+    border-color: oklch(0.5 0 0);
+  }
+
+  /* ── Page heading strip ──────────────────────────────────────────── */
+  .page-header {
+    @apply mb-6 pb-4;
+    border-bottom: 3px solid oklch(0.5016 0.1887 27.4816);
+  }
+  .page-title {
+    @apply text-2xl font-bold uppercase tracking-widest;
+    color: oklch(0.2393 0 0);
+    font-family: var(--font-sans);
+  }
+  .page-subtitle {
+    @apply mt-1 text-sm;
+    color: oklch(0.4091 0 0);
+  }
+
+  /* ── Modal overlay ───────────────────────────────────────────────── */
+  .modal-overlay {
+    @apply fixed inset-0 flex items-center justify-center z-50 p-4;
+    background-color: oklch(0 0 0 / 0.55);
+  }
+  .modal-box {
+    @apply w-full max-w-lg max-h-screen overflow-y-auto;
+    background-color: oklch(0.8452 0 0);
+    border: 3px solid oklch(0.2393 0 0);
+    box-shadow: 8px 8px 0 oklch(0.2393 0 0);
+    border-radius: var(--radius);
+  }
+  .modal-header {
+    @apply flex items-center justify-between px-6 py-4;
+    background-color: oklch(0.2393 0 0);
+    color: oklch(0.9067 0 0);
+  }
+  .modal-title {
+    @apply text-base font-bold uppercase tracking-widest;
+    font-family: var(--font-sans);
+  }
+  .modal-body {
+    @apply px-6 py-5 space-y-4;
+  }
+  .modal-footer {
+    @apply flex justify-end gap-3 px-6 py-4;
+    border-top: 2px solid oklch(0.6 0 0);
+  }
+
+  /* ── Stat card ───────────────────────────────────────────────────── */
+  .stat-card {
+    @apply relative overflow-hidden;
+    background-color: oklch(0.7572 0 0);
+    border: 2px solid oklch(0.4313 0 0);
+    box-shadow: 4px 4px 0 oklch(0.4313 0 0);
+    border-radius: var(--radius);
+  }
+  .stat-card-accent-bar {
+    @apply absolute left-0 top-0 bottom-0 w-1;
+  }
+
+  /* ── Form label ──────────────────────────────────────────────────── */
+  .form-label {
+    @apply block text-xs font-bold uppercase tracking-widest mb-1;
+    color: oklch(0.3 0 0);
+    font-family: var(--font-sans);
+  }
+
+  /* ── Section divider ─────────────────────────────────────────────── */
+  .section-divider {
+    @apply my-6;
+    border: none;
+    border-top: 2px solid oklch(0.6 0 0);
+  }
+
+  /* ── Spinner ─────────────────────────────────────────────────────── */
+  .spinner {
+    @apply animate-spin h-10 w-10;
+    border: 3px solid oklch(0.6 0 0);
+    border-top-color: oklch(0.5016 0.1887 27.4816);
+    border-radius: 50%;
+  }
+
+  /* ── Tab buttons ─────────────────────────────────────────────────── */
+  .tab-btn {
+    @apply px-5 py-2 text-sm font-bold uppercase tracking-widest
+    transition-all duration-150;
+    border: 2px solid oklch(0.4313 0 0);
+    border-radius: var(--radius);
+    background-color: transparent;
+    color: oklch(0.4091 0 0);
+  }
+  .tab-btn-active {
+    background-color: oklch(0.5016 0.1887 27.4816);
+    color: oklch(1 0 0);
+    border-color: oklch(0.5016 0.1887 27.4816);
+    box-shadow: 3px 3px 0 oklch(0.2393 0 0);
+  }
+  .tab-btn:not(.tab-btn-active):hover {
+    background-color: oklch(0.7572 0 0);
+  }
+
+  /* ── Alert / notification strip ─────────────────────────────────── */
+  .alert-error {
+    @apply px-4 py-3 text-sm font-medium;
+    background-color: oklch(0.9 0.07 30);
+    color: oklch(0.3 0.15 30);
+    border: 2px solid oklch(0.5 0.15 30);
+    border-radius: var(--radius);
+    box-shadow: 3px 3px 0 oklch(0.4 0.12 30);
+  }
+  .alert-success {
+    @apply px-4 py-3 text-sm font-medium;
+    background-color: oklch(0.9 0.07 130);
+    color: oklch(0.3 0.1 130);
+    border: 2px solid oklch(0.45 0.1 130);
+    border-radius: var(--radius);
+  }
+}
